@@ -1,4 +1,5 @@
-import com.mysql.cj.jdbc.result.ResultSetImpl;
+package servises;
+
 import constants.Configs;
 import constants.FieldNames;
 import constants.TableNames;
@@ -67,7 +68,7 @@ public class DBHandler extends Configs {
 
     // DISPLAY DATA BASE
     // -----------------------------------------------------------------------------------------------------------------
-    public void displayTable (){
+    public void displayTable() {
 
         try {
             Statement statement = getDbConnection().createStatement();
@@ -86,16 +87,7 @@ public class DBHandler extends Configs {
     }
 
 
-
-
-
-
-
-
-
     // -----------------------------------------------------------------------------------------------------------------
-
-
 
 
 }
