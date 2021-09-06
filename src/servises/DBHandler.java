@@ -3,6 +3,7 @@ package servises;
 import constants.Configs;
 import constants.FieldNames;
 import constants.TableNames;
+import logger.LogFile;
 import models.People;
 
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +14,9 @@ public class DBHandler extends Configs {
     private Connection dbConnection;
 
     private Connection getDbConnection() {
+
+        LogFile.log();
+
         String connectString = "jdbc:mysql://" + dbHost + ":" +
                 dbPort + "/" + dbName;
 
@@ -37,6 +41,9 @@ public class DBHandler extends Configs {
     // SIGN UP USERS
     // -----------------------------------------------------------------------------------------------------------------
     public void signUpUser(String firstName, String secondName, String username, String gender, String birthday) {
+
+
+        LogFile.log();
 
         String insert = "INSERT " + TableNames.PEOPLE + "(" + FieldNames.USERNAME + "," +
                 FieldNames.FIRSTNAME + "," + FieldNames.SECONDNAME + "," + FieldNames.GENDER +
@@ -69,6 +76,8 @@ public class DBHandler extends Configs {
     // DISPLAY DATA BASE
     // -----------------------------------------------------------------------------------------------------------------
     public void displayTable() {
+
+        LogFile.log();
 
         try {
             Statement statement = getDbConnection().createStatement();
