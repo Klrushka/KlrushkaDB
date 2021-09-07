@@ -4,7 +4,7 @@ import constants.Configs;
 import constants.FieldNames;
 import constants.TableNames;
 import logger.LogFile;
-import models.People;
+import models.User;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -40,15 +40,15 @@ public class DBHandler extends Configs {
 
     // SIGN UP USERS
     // -----------------------------------------------------------------------------------------------------------------
-    public void signUpUser(String firstName, String secondName, String username, String gender, String birthday) {
+    public void signUpUser(String firstName, String secondName, String username, String gender, String birthday, String mail, String password) {
 
 
         LogFile.log();
 
-        String insert = "INSERT " + TableNames.PEOPLE + "(" + FieldNames.USERNAME + "," +
+        String insert = "INSERT " + TableNames.USER + "(" + FieldNames.USERNAME + "," +
                 FieldNames.FIRSTNAME + "," + FieldNames.SECONDNAME + "," + FieldNames.GENDER +
-                "," + FieldNames.BIRTHDAY + ")" +
-                "VALUES(?,?,?,?,?)";
+                "," + FieldNames.BIRTHDAY + "," + FieldNames.MAIL + "," + FieldNames.PASSWORD + ")" +
+                "VALUES(?,?,?,?,?,?,?)";
 
 
         PreparedStatement prSt;
@@ -63,6 +63,8 @@ public class DBHandler extends Configs {
             prSt.setString(3, secondName);
             prSt.setString(4, gender);
             prSt.setDate(5, date);
+            prSt.setString(6,mail);
+            prSt.setString(7,password);
 
             prSt.executeUpdate();
 
@@ -77,15 +79,18 @@ public class DBHandler extends Configs {
     // -----------------------------------------------------------------------------------------------------------------
     public void displayTable() {
 
+
         LogFile.log();
 
         try {
             Statement statement = getDbConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM people");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
 
             while (resultSet.next()) {
-                System.out.println(new People(resultSet.getInt("idpeople"), resultSet.getString("firstname"), resultSet.getString("secondname"),
-                        resultSet.getString("username"), resultSet.getString("gender"), resultSet.getDate("birthday")));
+                System.out.println(new User(resultSet.getInt("iduser"), resultSet.getString("firstname"),
+                        resultSet.getString("secondname"), resultSet.getString("username"),
+                        resultSet.getString("gender"), resultSet.getDate("birthday"),
+                        resultSet.getString("mail"), resultSet.getString("password")));
             }
 
         } catch (SQLException e) {
@@ -94,8 +99,44 @@ public class DBHandler extends Configs {
 
 
     }
+    // -----------------------------------------------------------------------------------------------------------------
 
 
+
+    /**
+     * Returns User and set login flag. If User not found returns null
+     * and "Check your login or password"
+     * @param login String
+     * @param password String
+     * @return User
+     */
+    // LOGIN USER
+    // -----------------------------------------------------------------------------------------------------------------
+    public User login(String login, String password) {
+
+        LogFile.log();
+
+
+        try {
+            Statement statement = getDbConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users " +
+                    "WHERE ((\"" + login + "\"= username) OR" + " (\"" + login + "\"= mail)) AND (\"" + password + "\"= password)");
+
+            User user = new User(resultSet.getInt("id"), resultSet.getString("firstname"), resultSet.getString("secondname"),
+                    resultSet.getString("username"), resultSet.getString("gender"), resultSet.getDate("birthday"),
+                    resultSet.getString("mail"), resultSet.getString("password"));
+
+            user.setLogin(true);
+
+            return user;
+
+        } catch (SQLException e) {
+            System.out.println("Check your login or password");
+
+            return null;
+        }
+
+    }
     // -----------------------------------------------------------------------------------------------------------------
 
 

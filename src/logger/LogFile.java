@@ -9,13 +9,10 @@ public class LogFile {
         try {
             Properties properties = new Properties();
             properties.load(new FileReader("src\\config.properties"));
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(properties.getProperty("logFile")));
-
-            //TODO logger
-            bufferedWriter.append(String.valueOf(new Date())).append("in progress: ").append(Thread.currentThread().getStackTrace()[1].getMethodName());
-            bufferedWriter.newLine();
-            bufferedWriter.flush();
-            bufferedWriter.close();
+            FileWriter fileWriter = new FileWriter(properties.getProperty("logFile"),true);
+            fileWriter.write(new Date() + " " + Thread.currentThread().getStackTrace()[2] + "\n");
+            fileWriter.flush();
+            fileWriter.close();
 
 
         } catch (IOException e){
