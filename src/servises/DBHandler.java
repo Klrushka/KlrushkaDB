@@ -5,13 +5,25 @@ import constants.FieldNames;
 import constants.TableNames;
 import logger.LogFile;
 import models.User;
+import userhistory.History;
+import userhistory.HistoryInterface;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
 public class DBHandler extends Configs {
 
+    //TODO write documentation and optimize code
+
+    private User user;
     private Connection dbConnection;
+
+
+    /**
+     * Return DB connection
+     * @return Connection
+     */
+
 
     private Connection getDbConnection() {
 
@@ -37,6 +49,17 @@ public class DBHandler extends Configs {
         return dbConnection;
     }
 
+
+    /**
+     * Add users in DB
+     * @param firstName String
+     * @param secondName String
+     * @param username String
+     * @param gender String
+     * @param birthday String
+     * @param mail String
+     * @param password String
+     */
 
     // SIGN UP USERS
     // -----------------------------------------------------------------------------------------------------------------
@@ -68,6 +91,8 @@ public class DBHandler extends Configs {
 
             prSt.executeUpdate();
 
+            login(mail,password);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -75,12 +100,19 @@ public class DBHandler extends Configs {
     // -----------------------------------------------------------------------------------------------------------------
 
 
+    /**
+     *Display all fields from table
+     */
     // DISPLAY DATA BASE
     // -----------------------------------------------------------------------------------------------------------------
     public void displayTable() {
 
 
         LogFile.log();
+        user.getHistory().addHistory();
+
+        if (!user.isLogin()) return;
+
 
         try {
             Statement statement = getDbConnection().createStatement();
@@ -92,6 +124,7 @@ public class DBHandler extends Configs {
                         resultSet.getString("gender"), resultSet.getDate("birthday"),
                         resultSet.getString("mail"), resultSet.getString("password")));
             }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,16 +150,34 @@ public class DBHandler extends Configs {
         LogFile.log();
 
 
+
+        if (user != null && user.isLogin()) {
+            System.out.println("Please exit from current session");
+            return null;
+        }
+
+
         try {
             Statement statement = getDbConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users " +
                     "WHERE ((\"" + login + "\"= username) OR" + " (\"" + login + "\"= mail)) AND (\"" + password + "\"= password)");
 
-            User user = new User(resultSet.getInt("id"), resultSet.getString("firstname"), resultSet.getString("secondname"),
-                    resultSet.getString("username"), resultSet.getString("gender"), resultSet.getDate("birthday"),
-                    resultSet.getString("mail"), resultSet.getString("password"));
+            while (resultSet.next()) {
+                user = new User(resultSet.getInt("iduser"), resultSet.getString("firstname"), resultSet.getString("secondname"),
+                        resultSet.getString("username"), resultSet.getString("gender"), resultSet.getDate("birthday"),
+                        resultSet.getString("mail"), resultSet.getString("password"));
+            }
 
             user.setLogin(true);
+
+
+            if (!user.isHaveHistory()) {
+                user.setHaveHistory(true);
+                History history = new History(user);
+                user.setHistory(history);
+                user.getHistory().createHistoryFile();
+            }
+
 
             return user;
 
@@ -138,6 +189,13 @@ public class DBHandler extends Configs {
 
     }
     // -----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 }

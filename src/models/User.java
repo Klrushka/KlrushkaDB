@@ -1,5 +1,7 @@
 package models;
 
+import userhistory.History;
+
 import java.sql.Date;
 
 public class User {
@@ -10,7 +12,9 @@ public class User {
     private String gender;
     private Date birthday;
     private String mail;
-    private  String password;
+    private String password;
+    private boolean isHaveHistory = false;
+    private History history;
     private boolean login = false;
 
 
@@ -31,13 +35,6 @@ public class User {
                 "Gender: " + gender + " Birthday: " + birthday;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public boolean isLogin() {
         return login;
@@ -45,5 +42,29 @@ public class User {
 
     public void setLogin(boolean login) {
         this.login = login;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isHaveHistory() {
+        return isHaveHistory;
+    }
+
+    public void setHaveHistory(boolean haveHistory) {
+        isHaveHistory = haveHistory;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
+    }
+
+    public History getHistory() {
+        return history;
     }
 }

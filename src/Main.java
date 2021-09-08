@@ -1,16 +1,14 @@
+import models.User;
 import servises.DBHandler;
 
 public class Main {
     public static void main(String[] args) {
-        DBHandler dbHandler = new DBHandler();
 
-        dbHandler.signUpUser("Kiryl", "Sleptsou", "Klrushka", "M", "2003-08-12","co@gmail.com","password");
+        // TODO test other user
+        DBHandler dbHandler = new DBHandler();
+        User currentUser = dbHandler.login("Kka","password");
 
         dbHandler.displayTable();
-
-
-        dbHandler.login("Klrushka","password");
-
 
 
 

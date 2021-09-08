@@ -977,7 +977,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Plugin>caching_sha2_password</Plugin>
     </user>
     <table id="285" parent="2" name="users"/>
-    <column id="286" parent="285" name="idpeople">
+    <column id="286" parent="285" name="iduser">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
@@ -1018,10 +1018,28 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="294" parent="285" name="PRIMARY">
+    <index id="294" parent="285" name="username_UNIQUE">
+      <ColNames>username</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="295" parent="285" name="mail_UNIQUE">
+      <ColNames>mail</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="296" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>idpeople</ColNames>
+      <ColNames>iduser</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="297" parent="285" name="username_UNIQUE">
+      <ColNames>username</ColNames>
+      <UnderlyingIndexName>username_UNIQUE</UnderlyingIndexName>
+    </key>
+    <key id="298" parent="285" name="mail_UNIQUE">
+      <ColNames>mail</ColNames>
+      <UnderlyingIndexName>mail_UNIQUE</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
