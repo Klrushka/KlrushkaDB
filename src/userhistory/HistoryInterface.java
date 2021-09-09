@@ -9,6 +9,6 @@ public interface HistoryInterface {
     long findHistoryFile();
 
     void createHistoryFile();
-    void addHistory();
+    void addHistory(UserActions actions);
     // TODO void clearHistory();
 }

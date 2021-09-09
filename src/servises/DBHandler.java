@@ -6,6 +6,7 @@ import constants.TableNames;
 import logger.LogFile;
 import models.User;
 import userhistory.History;
+import userhistory.UserActions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -108,7 +109,7 @@ public class DBHandler extends Configs {
 
 
         LogFile.log();
-        user.getHistory().addHistory();
+        user.getHistory().addHistory(UserActions.DISPLAY_TABLE);
 
         if (!user.isLogin()) return;
 

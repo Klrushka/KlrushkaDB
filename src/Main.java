@@ -1,14 +1,20 @@
+import help.Menu;
 import models.User;
 import servises.DBHandler;
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        // TODO test other user
-        DBHandler dbHandler = new DBHandler();
-        User currentUser = dbHandler.login("Kka","password");
+        Menu.displayMenu();
 
-        dbHandler.displayTable();
+        System.out.println("Please enter number");
+        int choice = scanner.nextInt();
+
+
+
 
 
     }

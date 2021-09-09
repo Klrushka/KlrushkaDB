@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.PrivilegedAction;
+import java.util.Date;
 import java.util.Properties;
 
 public class History implements HistoryInterface {
@@ -13,16 +15,18 @@ public class History implements HistoryInterface {
     private static Properties properties;
     private String path;
     private static final File DIRECTORY;
+    private String USER_INFORMATION;
     // TODO solve problem with USER_INFORMATION field
 
     public History(User user) {
         currentUser = user;
+        USER_INFORMATION = "#" + currentUser.getId() +
+                "_" + currentUser.getUsername();
+
     }
 
 
     static {
-
-
 
         try {
             properties = new Properties();
@@ -40,8 +44,7 @@ public class History implements HistoryInterface {
 
     @Override
     public long findHistoryFile() {
-        String USER_INFORMATION = "#" + currentUser.getId() +
-                "_" + currentUser.getUsername();
+
         long isFind = -1;
 
         for (File file : DIRECTORY.listFiles()){
@@ -56,8 +59,6 @@ public class History implements HistoryInterface {
     @Override
     public void createHistoryFile() {
 
-        String USER_INFORMATION = "#" + currentUser.getId() +
-                "_" + currentUser.getUsername();
 
         File file = new File(properties.getProperty("historyFilesDirectory"),  USER_INFORMATION + ".txt");
 
@@ -66,12 +67,11 @@ public class History implements HistoryInterface {
     }
 
     @Override
-    public void addHistory() {
-        String USER_INFORMATION = "#" + currentUser.getId() +
-                "_" + currentUser.getUsername();
+    public void addHistory(UserActions actions) {
+
         try {
             FileWriter fileWriter = new FileWriter(path,true);
-            fileWriter.write(USER_INFORMATION + "     фщпзиьтршуеиплваьмтаиыдшлфжоцбАТмишзгуыфлваошщпгк");
+            fileWriter.write(new Date() + ": |" + USER_INFORMATION + ", " + actions.name() + "|\n");
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
