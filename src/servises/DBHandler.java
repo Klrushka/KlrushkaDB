@@ -6,7 +6,6 @@ import constants.TableNames;
 import logger.LogFile;
 import models.User;
 import userhistory.History;
-import userhistory.HistoryInterface;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
