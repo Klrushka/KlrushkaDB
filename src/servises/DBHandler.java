@@ -51,19 +51,19 @@ public class DBHandler extends Configs {
 
 
     /**
-     * Add users in DB
-     * @param firstName String
-     * @param secondName String
-     * @param username String
-     * @param gender String
-     * @param birthday String
-     * @param mail String
-     * @param password String
+     * Add new user in DB
+     * @param userInfo  String[]
+     * Where [0] - username
+     *       [1] - firstname
+     *       [2] - secondnamme
+     *       [3] - gender
+     *       [4] - birthday(yyyy-mm-dd)
+     *       [5] - mail
+     *       [6] - password
      */
-
     // SIGN UP USERS
     // -----------------------------------------------------------------------------------------------------------------
-    public void signUpUser(String firstName, String secondName, String username, String gender, String birthday, String mail, String password) {
+    public User signUpUser(String... userInfo) {
 
 
         LogFile.log();
@@ -77,25 +77,30 @@ public class DBHandler extends Configs {
         PreparedStatement prSt;
         try {
 
-            Date date = Date.valueOf(birthday);
+            Date date = Date.valueOf(userInfo[4]);
 
             prSt = getDbConnection().prepareStatement(insert);
 
-            prSt.setString(1, username);
-            prSt.setString(2, firstName);
-            prSt.setString(3, secondName);
-            prSt.setString(4, gender);
+            prSt.setString(1, userInfo[0]);
+            prSt.setString(2, userInfo[1]);
+            prSt.setString(3, userInfo[2]);
+            prSt.setString(4, userInfo[3]);
             prSt.setDate(5, date);
-            prSt.setString(6,mail);
-            prSt.setString(7,password);
+            prSt.setString(6,userInfo[5]);
+            prSt.setString(7,userInfo[6]);
 
             prSt.executeUpdate();
 
-            login(mail,password);
+            user = login(userInfo[5],userInfo[6]);
+
+            return user;
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+
+            return null;
         }
+
     }
     // -----------------------------------------------------------------------------------------------------------------
 
