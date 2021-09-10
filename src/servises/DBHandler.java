@@ -35,8 +35,6 @@ public class DBHandler extends Configs {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
 
-            System.out.println("Connection successful");
-
             dbConnection = DriverManager.getConnection(connectString, dbUser, dbPass);
 
 
@@ -144,15 +142,17 @@ public class DBHandler extends Configs {
     /**
      * Returns User and set login flag. If User not found returns null
      * and "Check your login or password"
-     * @param login String
-     * @param password String
+     * @param loginData String[]
+     *                  [0] - login
+     *                  [1] - password
      * @return User
      */
     // LOGIN USER
     // -----------------------------------------------------------------------------------------------------------------
-    public User login(String login, String password) {
+    public User login(String... loginData) {
 
         LogFile.log();
+
 
 
 
@@ -165,7 +165,7 @@ public class DBHandler extends Configs {
         try {
             Statement statement = getDbConnection().createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users " +
-                    "WHERE ((\"" + login + "\"= username) OR" + " (\"" + login + "\"= mail)) AND (\"" + password + "\"= password)");
+                    "WHERE ((\"" + loginData[0] + "\"= username) OR" + " (\"" + loginData[0] + "\"= mail)) AND (\"" + loginData[1] + "\"= password)");
 
             while (resultSet.next()) {
                 user = new User(resultSet.getInt("iduser"), resultSet.getString("firstname"), resultSet.getString("secondname"),
@@ -176,6 +176,7 @@ public class DBHandler extends Configs {
             user.setLogin(true);
 
 
+
             if (!user.isHaveHistory()) {
                 user.setHaveHistory(true);
                 History history = new History(user);
@@ -183,6 +184,9 @@ public class DBHandler extends Configs {
                 user.getHistory().createHistoryFile();
             }
 
+            user.getHistory().addHistory(UserActions.LOGIN);
+
+            System.out.println("**************** You enter to the system **************** \n");
 
             return user;
 

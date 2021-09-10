@@ -25,7 +25,7 @@ public class Main {
                     user = dbHandler.signUpUser(ConsoleHandler.signUpData());
                     break;
                 case 2:
-                    user = dbHandler.login(ConsoleHandler.loginData()[0], ConsoleHandler.loginData()[1]);
+                    user = dbHandler.login(ConsoleHandler.loginData());
                     break;
                 case 3:
                     dbHandler.displayTable();
