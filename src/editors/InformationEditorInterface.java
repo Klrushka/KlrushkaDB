@@ -9,6 +9,7 @@ public interface InformationEditorInterface {
     void changeSecondname();
     void changeGender();
     void changeBirthday();
+    void changeMail();
     void changePassword();
 
 }

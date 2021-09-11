@@ -1,7 +1,7 @@
 package help;
 
 public enum EditAccountValues {
-    CHANGE_USERNAME("Change user name"),
+    CHANGE_USERNAME("Change username"),
     CHANGE_FIRSTNAME("Change firstname"),
     CHANGE_SECONDNAME("Change secondname"),
     CHANGE_GENDER("Change gender"),

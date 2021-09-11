@@ -50,7 +50,7 @@ public class ConsoleHandler {
 
 
 
-    private static String username(){
+    public static String username(){
         System.out.println("Please enter your username");
         String s = SCANNER.nextLine();
 
@@ -63,7 +63,7 @@ public class ConsoleHandler {
     }
 
 
-    private static String firstname(){
+    public static String firstname(){
         System.out.println("Please enter your firstname");
         String s = SCANNER.nextLine();
 
@@ -78,7 +78,7 @@ public class ConsoleHandler {
 
 
 
-    private static String secondname(){
+    public static String secondname(){
         System.out.println("Please enter your secondname");
         String s = SCANNER.nextLine();
 
@@ -91,7 +91,7 @@ public class ConsoleHandler {
     }
 
 
-    private static String gender(){
+    public static String gender(){
         System.out.println("Please enter your gender (M/W/A(another))");
         String s = SCANNER.nextLine();
 
@@ -104,7 +104,7 @@ public class ConsoleHandler {
     }
 
 
-    private static String birthday (){
+    public static String birthday (){
         System.out.println("Please enter your birthday(yyyy-mm-dd).....");
         String s = SCANNER.nextLine();
         Pattern pattern = Pattern.compile("^((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$");
@@ -119,7 +119,7 @@ public class ConsoleHandler {
     }
 
 
-    private static String mail(){
+    public static String mail(){
         System.out.println("Please enter your mail.....");
         String s = SCANNER.nextLine();
         Pattern pattern = Pattern.compile(".*@.*\\..*");
@@ -133,7 +133,7 @@ public class ConsoleHandler {
         return s;
     }
 
-    private static String password(){
+    public static String password(){
         System.out.println("Please enter your password");
         String s = SCANNER.nextLine();
 

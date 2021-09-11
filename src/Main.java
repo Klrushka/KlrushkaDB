@@ -1,4 +1,5 @@
 import consolehandler.ConsoleHandler;
+import editors.InformationEditor;
 import help.Menu;
 import models.User;
 import servises.DBHandler;
@@ -10,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
         DBHandler dbHandler = new DBHandler();
         User user = null;
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -39,7 +41,7 @@ public class Main {
 
                         switch (ch) {
                             case 1: // display user history
-                                if(History.historyCheckLogin(user)){
+                                if (History.historyCheckLogin(user)) {
                                     user.getHistory().displayHistory();
                                 }
                                 break;
@@ -47,6 +49,9 @@ public class Main {
                                 if (History.historyCheckLogin(user)) {
                                     user.getHistory().clearHistory();
                                 }
+                                break;
+                            default:
+                                System.out.println("Please check your choice...");
                                 break;
                         }
 
@@ -61,6 +66,73 @@ public class Main {
                         System.out.println("Please enter to System\n");
                     } else {
                         user.setLogin(false);
+                    }
+                    break;
+
+                case 6: // account menu
+                    Menu.displayMyAccountMenu();
+                    System.out.println("Please enter number: ");
+                    ch = scanner.nextInt();
+
+                    while (ch != 0) {
+
+                        switch (ch) {
+                            case 1: //information
+                                //TODO information
+                                break;
+                            case 2: // edit account
+                                Menu.displayEditMenu();
+                                System.out.println("Please enter number: ");
+                                ch = scanner.nextInt();
+                                InformationEditor informationEditor = new InformationEditor(user);
+
+
+                                while (ch != 0) {
+
+                                    switch (ch) {
+                                        case 1: // change username
+                                            informationEditor.changeUsername();
+                                            break;
+                                        case 2: // change firstname
+                                            informationEditor.changeFirstname();
+                                            break;
+                                        case 3: // change secondname
+                                            informationEditor.changeSecondname();
+                                            break;
+                                        case 4: // change gender
+                                            informationEditor.changeGender();
+                                            break;
+                                        case 5: // change birthday
+                                            informationEditor.changeBirthday();
+                                            break;
+                                        case 6: // change mail
+                                            informationEditor.changeMail();
+                                            break;
+                                        case 7: // change password
+                                            informationEditor.changePassword();
+                                            break;
+                                        default:
+                                            System.out.println("Please check your choice...");
+                                            break;
+
+                                    }
+
+
+                                    Menu.displayEditMenu();
+                                    System.out.println("Please enter number: ");
+                                    ch = scanner.nextInt();
+                                }
+
+                                break;
+                            default:
+                                System.out.println("Please check your choice...");
+                                break;
+                        }
+
+
+                        Menu.displayMyAccountMenu();
+                        System.out.println("Please enter number: ");
+                        ch = scanner.nextInt();
                     }
                     break;
                 default: {

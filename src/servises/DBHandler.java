@@ -16,7 +16,7 @@ public class DBHandler extends Configs {
     //TODO write documentation and optimize code
 
     protected User user;
-    protected Connection dbConnection;
+    private Connection dbConnection;
 
 
     /**
@@ -26,7 +26,7 @@ public class DBHandler extends Configs {
      */
 
 
-    private Connection getDbConnection() {
+    protected Connection getDbConnection() {
 
         LogFile.log();
 
