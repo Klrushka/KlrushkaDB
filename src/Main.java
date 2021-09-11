@@ -2,6 +2,7 @@ import consolehandler.ConsoleHandler;
 import help.Menu;
 import models.User;
 import servises.DBHandler;
+import userhistory.History;
 
 import java.util.Scanner;
 
@@ -12,7 +13,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        Menu.displayMenu();
+        Menu.displayMainMenu();
 
         System.out.println("Please enter number");
         int choice = scanner.nextInt();
@@ -21,17 +22,39 @@ public class Main {
 
         while (choice != 0) {
             switch (choice) {
-                case 1:
+                case 1: // sing up
                     user = dbHandler.signUpUser(ConsoleHandler.signUpData());
                     break;
-                case 2:
+                case 2: // sing in
                     user = dbHandler.login(ConsoleHandler.loginData());
                     break;
-                case 3:
+                case 3: // display table
                     dbHandler.displayTable();
                     break;
-                case 4:
-                    //TODO add history display
+                case 4: // history
+                    Menu.displayHistoryMenu();
+                    System.out.println("Please enter number: ");
+                    int ch = scanner.nextInt();
+                    while (ch != 0) {
+
+                        switch (ch) {
+                            case 1:
+                                if(History.historyCheckLogin(user)){
+                                    user.getHistory().displayHistory();
+                                }
+                                break;
+                            case 2:
+                                if (History.historyCheckLogin(user)) {
+                                    user.getHistory().clearHistory();
+                                }
+                                break;
+                        }
+
+
+                        Menu.displayHistoryMenu();
+                        System.out.println("Please enter number: ");
+                        ch = scanner.nextInt();
+                    }
                     break;
                 case 5:
                     if (user == null) {
@@ -44,9 +67,9 @@ public class Main {
                     System.out.println("Please check your value\n");
                 }
             }
-            Menu.displayMenu();
+            Menu.displayMainMenu();
             System.out.println("Please enter number");
-             choice = scanner.nextInt();
+            choice = scanner.nextInt();
 
         }
     }

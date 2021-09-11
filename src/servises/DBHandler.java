@@ -112,10 +112,14 @@ public class DBHandler extends Configs {
 
 
         LogFile.log();
+
+
+        if (user == null || !user.isLogin()) {
+            System.out.println("Please enter to system");
+            return;
+        }
+
         user.getHistory().addHistory(UserActions.DISPLAY_TABLE);
-
-        if (!user.isLogin()) return;
-
 
         try {
             Statement statement = getDbConnection().createStatement();
@@ -198,7 +202,6 @@ public class DBHandler extends Configs {
 
     }
     // -----------------------------------------------------------------------------------------------------------------
-
 
 
 

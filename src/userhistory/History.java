@@ -6,17 +6,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.security.PrivilegedAction;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Scanner;
 
 public class History implements HistoryInterface {
-    private  User currentUser;
+
+    private User currentUser;
     private static Properties properties;
     private String path;
     private static final File DIRECTORY;
     private String USER_INFORMATION;
-    // TODO solve problem with USER_INFORMATION field
 
     public History(User user) {
         currentUser = user;
@@ -39,28 +39,24 @@ public class History implements HistoryInterface {
 
     }
 
-
-
-
     @Override
-    public long findHistoryFile() {
-
-        long isFind = -1;
-
-        for (File file : DIRECTORY.listFiles()){
-            if (file.getName().equals(USER_INFORMATION)){
-                isFind = currentUser.getId();
-                return isFind;
-            }
+    public void clearHistory() {
+        try {
+            FileWriter writer = new FileWriter(path);
+            writer.write("");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return isFind;
+
+
     }
 
     @Override
     public void createHistoryFile() {
 
 
-        File file = new File(properties.getProperty("historyFilesDirectory"),  USER_INFORMATION + ".txt");
+        File file = new File(properties.getProperty("historyFilesDirectory"), USER_INFORMATION + ".txt");
 
         path = properties.getProperty("historyFilesDirectory") + "\\" + USER_INFORMATION + ".txt";
 
@@ -70,12 +66,35 @@ public class History implements HistoryInterface {
     public void addHistory(UserActions actions) {
 
         try {
-            FileWriter fileWriter = new FileWriter(path,true);
+            FileWriter fileWriter = new FileWriter(path, true);
             fileWriter.write(new Date() + ": |" + USER_INFORMATION + ", " + actions.name() + "|\n");
             fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Override
+    public void displayHistory() {
+
+        try {
+            Scanner scanner = new Scanner(new File(path));
+
+            while (scanner.hasNext()){
+                System.out.println(scanner.nextLine());
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean historyCheckLogin(User user) {
+        if (user == null) {
+            System.out.println("Please enter to the system...");
+            return false;
+        }
+        return true;
     }
 }

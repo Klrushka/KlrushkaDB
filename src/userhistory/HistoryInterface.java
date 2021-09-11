@@ -3,12 +3,22 @@ package userhistory;
 public interface HistoryInterface {
 
     /**
-     * Searching historyFile
-     * @return -1 if not found, else id of user
+     * Create history txt file in src//userhistory//data
      */
-    long findHistoryFile();
-
     void createHistoryFile();
+
+    /**
+     * Add history to a history file of user
+     * @param actions
+     */
     void addHistory(UserActions actions);
-    // TODO void clearHistory();
+
+
+    /**
+     * Clear history file
+     */
+    void clearHistory();
+
+
+    void displayHistory();
 }
