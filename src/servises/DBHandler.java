@@ -21,6 +21,7 @@ public class DBHandler extends Configs {
 
     /**
      * Return DB connection
+     *
      * @return Connection
      */
 
@@ -50,14 +51,15 @@ public class DBHandler extends Configs {
 
     /**
      * Add new user in DB
-     * @param userInfo  String[]
-     * Where [0] - username
-     *       [1] - firstname
-     *       [2] - secondnamme
-     *       [3] - gender
-     *       [4] - birthday(yyyy-mm-dd)
-     *       [5] - mail
-     *       [6] - password
+     *
+     * @param userInfo String[]
+     *                 Where [0] - username
+     *                 [1] - firstname
+     *                 [2] - secondnamme
+     *                 [3] - gender
+     *                 [4] - birthday(yyyy-mm-dd)
+     *                 [5] - mail
+     *                 [6] - password
      */
     // SIGN UP USERS
     // -----------------------------------------------------------------------------------------------------------------
@@ -84,18 +86,20 @@ public class DBHandler extends Configs {
             prSt.setString(3, userInfo[2]);
             prSt.setString(4, userInfo[3]);
             prSt.setDate(5, date);
-            prSt.setString(6,userInfo[5]);
-            prSt.setString(7,userInfo[6]);
+            prSt.setString(6, userInfo[5]);
+            prSt.setString(7, userInfo[6]);
 
             prSt.executeUpdate();
 
-            user = login(userInfo[5],userInfo[6]);
+            user = login(userInfo[5], userInfo[6]);
 
             return user;
 
+        } catch (SQLIntegrityConstraintViolationException e) {
+            System.out.println("!!!!!!!!! Please check your username !!!!!!!!!");
+            return null;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-
             return null;
         }
 
@@ -104,7 +108,7 @@ public class DBHandler extends Configs {
 
 
     /**
-     *Display all fields from table
+     * Display all fields from table
      */
     // DISPLAY DATA BASE
     // -----------------------------------------------------------------------------------------------------------------
@@ -142,10 +146,10 @@ public class DBHandler extends Configs {
     // -----------------------------------------------------------------------------------------------------------------
 
 
-
     /**
      * Returns User and set login flag. If User not found returns null
      * and "Check your login or password"
+     *
      * @param loginData String[]
      *                  [0] - login
      *                  [1] - password
@@ -156,8 +160,6 @@ public class DBHandler extends Configs {
     public User login(String... loginData) {
 
         LogFile.log();
-
-
 
 
         if (user != null && user.isLogin()) {
@@ -178,7 +180,6 @@ public class DBHandler extends Configs {
             }
 
             user.setLogin(true);
-
 
 
             if (!user.isHaveHistory()) {
@@ -202,12 +203,6 @@ public class DBHandler extends Configs {
 
     }
     // -----------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
 
 
 }

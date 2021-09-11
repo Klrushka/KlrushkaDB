@@ -39,7 +39,7 @@ public class ConsoleHandler {
     public static String[] loginData (){
         String[] strings = new String[2];
 
-        strings[0] = mail();
+        strings[0] = username();
 
         strings[1] = password();
 
@@ -105,13 +105,13 @@ public class ConsoleHandler {
 
 
     private static String birthday (){
-        System.out.println("Please check your birthday.....");
+        System.out.println("Please enter your birthday(yyyy-mm-dd).....");
         String s = SCANNER.nextLine();
-        Pattern pattern = Pattern.compile("(\\d\\d\\d\\d-[0-1][1-2]-[0-2][0-9]) | (\\d\\d\\d\\d-0[0-9]-3[0-1])");
+        Pattern pattern = Pattern.compile("^((19|20)\\d\\d)-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$");
         Matcher matcher = pattern.matcher(s);
 
         while (!matcher.matches()){
-            System.out.println("Please check your date.....");
+            System.out.println("Please check(yyyy-mm-dd) your date.....");
             s = SCANNER.nextLine();
             matcher.reset(s);
         }
