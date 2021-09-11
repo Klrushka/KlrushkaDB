@@ -5,7 +5,8 @@ public enum MenuValues {
     SIGN_IN("Sign in"),
     DISPLAY_TABLE("Display Table"),
     HISTORY("History"),
-    LOGOUT("logout");
+    LOGOUT("logout"),
+    MY_ACCOUNT("My account");
 
     private String value;
 

@@ -38,12 +38,12 @@ public class Main {
                     while (ch != 0) {
 
                         switch (ch) {
-                            case 1:
+                            case 1: // display user history
                                 if(History.historyCheckLogin(user)){
                                     user.getHistory().displayHistory();
                                 }
                                 break;
-                            case 2:
+                            case 2: // clean user
                                 if (History.historyCheckLogin(user)) {
                                     user.getHistory().clearHistory();
                                 }
@@ -56,7 +56,7 @@ public class Main {
                         ch = scanner.nextInt();
                     }
                     break;
-                case 5:
+                case 5: // logout user
                     if (user == null) {
                         System.out.println("Please enter to System\n");
                     } else {

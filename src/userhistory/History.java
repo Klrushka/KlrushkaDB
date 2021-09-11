@@ -1,5 +1,6 @@
 package userhistory;
 
+import logger.LogFile;
 import models.User;
 
 import java.io.File;
@@ -15,7 +16,6 @@ public class History implements HistoryInterface {
     private User currentUser;
     private static Properties properties;
     private String path;
-    private static final File DIRECTORY;
     private String USER_INFORMATION;
 
     public History(User user) {
@@ -34,13 +34,13 @@ public class History implements HistoryInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        DIRECTORY = new File(properties.getProperty("historyFilesDirectory"));
-
     }
 
     @Override
     public void clearHistory() {
+
+        LogFile.log();
+
         try {
             FileWriter writer = new FileWriter(path);
             writer.write("");
@@ -55,6 +55,8 @@ public class History implements HistoryInterface {
     @Override
     public void createHistoryFile() {
 
+        LogFile.log();
+
 
         File file = new File(properties.getProperty("historyFilesDirectory"), USER_INFORMATION + ".txt");
 
@@ -64,6 +66,8 @@ public class History implements HistoryInterface {
 
     @Override
     public void addHistory(UserActions actions) {
+
+        LogFile.log();
 
         try {
             FileWriter fileWriter = new FileWriter(path, true);
@@ -79,19 +83,23 @@ public class History implements HistoryInterface {
     @Override
     public void displayHistory() {
 
+        LogFile.log();
+        currentUser.getHistory().addHistory(UserActions.DISPLAY_HISTORY);
+
         try {
             Scanner scanner = new Scanner(new File(path));
 
-            while (scanner.hasNext()){
+            while (scanner.hasNext()) {
                 System.out.println(scanner.nextLine());
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static boolean historyCheckLogin(User user) {
-        if (user == null) {
+        LogFile.log();
+        if (user == null || !user.isLogin()) {
             System.out.println("Please enter to the system...");
             return false;
         }

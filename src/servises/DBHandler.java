@@ -15,8 +15,8 @@ public class DBHandler extends Configs {
 
     //TODO write documentation and optimize code
 
-    private User user;
-    private Connection dbConnection;
+    protected User user;
+    protected Connection dbConnection;
 
 
     /**
