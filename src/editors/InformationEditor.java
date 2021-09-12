@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
-//TODO check null
+
 public class InformationEditor extends DBHandler implements InformationEditorInterface {
     private User user;
 

@@ -20,7 +20,6 @@ public class Main {
         System.out.println("Please enter number");
         int choice = scanner.nextInt();
 
-        //TODO FIX bug with history and login user
 
         while (choice != 0) {
             switch (choice) {
