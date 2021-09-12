@@ -1,0 +1,2 @@
+Sun Sep 12 10:47:35 MSK 2021: |#1_Klrushka, LOGIN|
+Sun Sep 12 10:47:40 MSK 2021: |#1_Klrushka, DISPLAY_TABLE|
