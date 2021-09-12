@@ -71,18 +71,22 @@ public class Main {
 
                 case 6: // account menu
                     Menu.displayMyAccountMenu();
-                    System.out.println("Please enter number: ");
+                    System.out.println("Please enter number: \n");
                     ch = scanner.nextInt();
 
                     while (ch != 0) {
 
                         switch (ch) {
                             case 1: //information
-                                //TODO information
+                                if (user != null) {
+                                    user.userInformation();
+                                } else {
+                                    System.out.println("Please enter to System");
+                                }
                                 break;
                             case 2: // edit account
                                 Menu.displayEditMenu();
-                                System.out.println("Please enter number: ");
+                                System.out.println("Please enter number: \n");
                                 ch = scanner.nextInt();
                                 InformationEditor informationEditor = new InformationEditor(user);
 

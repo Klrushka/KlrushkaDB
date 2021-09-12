@@ -7,11 +7,10 @@ import servises.DBHandler;
 import userhistory.History;
 import userhistory.UserActions;
 
-import java.sql.Date;
+
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
-import java.util.Scanner;
 
 //TODO check null
 public class InformationEditor extends DBHandler implements InformationEditorInterface {
@@ -26,6 +25,11 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
 
         LogFile.log();
 
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
         sqlRequest("users","username", ConsoleHandler.username());
 
         addHist(UserActions.CHANGE_USERNAME);
@@ -35,6 +39,14 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
     public void changeFirstname() {
 
         LogFile.log();
+
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
 
         sqlRequest("users","firstname", ConsoleHandler.firstname());
 
@@ -46,6 +58,14 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
 
         LogFile.log();
 
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
+
         sqlRequest("users","secondname", ConsoleHandler.secondname());
 
         addHist(UserActions.CHANGE_SECONDNAME);
@@ -56,15 +76,31 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
 
         LogFile.log();
 
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
+
         sqlRequest("users","gender", ConsoleHandler.gender());
 
         addHist(UserActions.CHANGE_GENDER);
     }
-////////////////////////////////////////////////
+
     @Override
     public void changeBirthday() {
 
         LogFile.log();
+
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
 
         sqlRequest("users","birthday", ConsoleHandler.birthday());
 
@@ -78,6 +114,14 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
 
         LogFile.log();
 
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
+
         sqlRequest("users","mail", ConsoleHandler.mail());
 
 
@@ -88,6 +132,14 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
     public void changePassword() {
 
         LogFile.log();
+
+
+
+        if (isNull(user)) {
+            System.out.println("Please enter to System...\n");
+            return;
+        }
+
 
 
         sqlRequest("users","password", ConsoleHandler.password());
@@ -121,5 +173,9 @@ public class InformationEditor extends DBHandler implements InformationEditorInt
         if(History.historyCheckLogin(user)){
             user.getHistory().addHistory(actions);
         }
+    }
+
+    private boolean isNull(User user){
+        return user == null;
     }
 }

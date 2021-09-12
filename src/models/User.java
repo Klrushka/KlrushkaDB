@@ -36,6 +36,20 @@ public class User {
     }
 
 
+    public void userInformation() {
+        StringBuffer sb = new StringBuffer();
+        String medium = "| " + id + " | " + username + " | " + firstname + " | " + secondname + " | " + gender + " | " + birthday + " | " + mail + "|";
+
+        for (int i = 0; i < medium.length(); i++) {
+            sb.append("*");
+        }
+
+        System.out.printf("%s\n%s\n%s\n", sb, medium, sb);
+
+
+    }
+
+
     public boolean isLogin() {
         return login;
     }
@@ -67,4 +81,5 @@ public class User {
     public History getHistory() {
         return history;
     }
+
 }
