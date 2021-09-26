@@ -1,15 +1,18 @@
 import consolehandler.ConsoleHandler;
 import editors.InformationEditor;
+import enums.help.EditAccountValues;
+import enums.help.MenuValues;
 import help.Menu;
 import models.User;
-import servises.DBHandler;
+import servises.HistoryService;
+import servises.UserServices;
 import userhistory.History;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        DBHandler dbHandler = new DBHandler();
+        UserServices userServices = new UserServices();
         User user = null;
 
 
@@ -24,13 +27,13 @@ public class Main {
         while (choice != 0) {
             switch (choice) {
                 case 1: // sing up
-                    user = dbHandler.signUpUser(ConsoleHandler.signUpData());
+                    user = userServices.signUpUser(ConsoleHandler.signUpData());
                     break;
                 case 2: // sing in
-                    user = dbHandler.login(ConsoleHandler.loginData());
+                    user = userServices.login(ConsoleHandler.loginData());
                     break;
                 case 3: // display table
-                    dbHandler.displayTable();
+                    userServices.displayTable();
                     break;
                 case 4: // history
                     Menu.displayHistoryMenu();
@@ -64,6 +67,7 @@ public class Main {
                     if (user == null) {
                         System.out.println("Please enter to System\n");
                     } else {
+                        HistoryService.addActionToHistory(user, MenuValues.LOGOUT.getValue());
                         user.setLogin(false);
                     }
                     break;
@@ -113,6 +117,10 @@ public class Main {
                                             break;
                                         case 7: // change password
                                             informationEditor.changePassword();
+                                            break;
+                                        case 8:
+                                            informationEditor.confirmAllChanges();
+                                            user = userServices.findUser(user.getId());
                                             break;
                                         default:
                                             System.out.println("Please check your choice...");

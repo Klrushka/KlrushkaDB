@@ -9,5 +9,5 @@ public class FieldNames {
     public static final String GENDER = "gender";
     public static final String MAIL = "mail";
     public static final String PASSWORD = "password";
-
+    public static final String ACTION = "action";
 }

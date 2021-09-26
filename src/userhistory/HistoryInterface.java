@@ -1,5 +1,7 @@
 package userhistory;
 
+import enums.userhistory.UserActions;
+
 public interface HistoryInterface {
 
     /**

@@ -1,4 +1,4 @@
-package help;
+package enums.help;
 
 public enum EditAccountValues {
     CHANGE_USERNAME("Change username"),
@@ -7,7 +7,8 @@ public enum EditAccountValues {
     CHANGE_GENDER("Change gender"),
     CHANGE_BIRTHDAY("Change birthday"),
     CHANGE_MAIL("Change mail"),
-    CHANGE_PASSWORD("Change password");
+    CHANGE_PASSWORD("Change password"),
+    CONFIRM_CHANGES("Confirm Changes");
 
     private String value;
 

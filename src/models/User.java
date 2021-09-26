@@ -37,6 +37,8 @@ public class User {
 
 
     public void userInformation() {
+
+
         StringBuffer sb = new StringBuffer();
         String medium = "| " + id + " | " + username + " | " + firstname + " | " + secondname + " | " + gender + " | " + birthday + " | " + mail + "|";
 
@@ -45,8 +47,6 @@ public class User {
         }
 
         System.out.printf("%s\n%s\n%s\n", sb, medium, sb);
-
-
     }
 
 
@@ -82,4 +82,11 @@ public class User {
         return history;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public String getSecondname() {
+        return secondname;
+    }
 }

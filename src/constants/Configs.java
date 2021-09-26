@@ -1,11 +1,9 @@
 package constants;
 
 public class Configs {
-    protected String dbHost = "127.0.0.1";
-    protected String dbPort = "3306";
-    protected String dbUser = "root";
-    protected String dbPass = "SQL2021";
-    protected String dbName = "eyeofgod";
-
-
+    protected static String dbHost = "127.0.0.1";
+    protected static String dbPort = "3306";
+    protected static String dbUser = "root";
+    protected static String dbPass = "SQL2021";
+    protected static String dbName = "eyeofgod";
 }

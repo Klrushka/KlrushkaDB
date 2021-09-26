@@ -1,7 +1,10 @@
 package userhistory;
 
+import enums.help.MenuHistoryValues;
+import enums.userhistory.UserActions;
 import logger.LogFile;
 import models.User;
+import servises.HistoryService;
 
 import java.io.File;
 import java.io.FileReader;
@@ -40,6 +43,7 @@ public class History implements HistoryInterface {
     public void clearHistory() {
 
         LogFile.log();
+        HistoryService.addActionToHistory(currentUser, MenuHistoryValues.CLEAR_HISTORY.getValue());
 
         try {
             FileWriter writer = new FileWriter(path);
@@ -56,6 +60,7 @@ public class History implements HistoryInterface {
     public void createHistoryFile() {
 
         LogFile.log();
+        HistoryService.addActionToHistory(currentUser,"create history file");
 
 
         File file = new File(properties.getProperty("historyFilesDirectory"), USER_INFORMATION + ".txt");
@@ -68,6 +73,7 @@ public class History implements HistoryInterface {
     public void addHistory(UserActions actions) {
 
         LogFile.log();
+        HistoryService.addActionToHistory(currentUser,"login");
 
         try {
             FileWriter fileWriter = new FileWriter(path, true);
@@ -85,6 +91,7 @@ public class History implements HistoryInterface {
 
         LogFile.log();
         currentUser.getHistory().addHistory(UserActions.DISPLAY_HISTORY);
+        HistoryService.addActionToHistory(currentUser,UserActions.DISPLAY_HISTORY.toString());
 
         try {
             Scanner scanner = new Scanner(new File(path));

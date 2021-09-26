@@ -1,4 +1,4 @@
-package userhistory;
+package enums.userhistory;
 
 public enum UserActions {
     LOGIN(),

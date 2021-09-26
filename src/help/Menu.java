@@ -1,5 +1,9 @@
 package help;
 
+import enums.help.EditAccountValues;
+import enums.help.MenuHistoryValues;
+import enums.help.MenuValues;
+import enums.help.MyAccountValues;
 import logger.LogFile;
 
 public class Menu {

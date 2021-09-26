@@ -1,4 +1,4 @@
-package help;
+package enums.help;
 
 public enum MenuValues {
     SIGN_UP("Sign up"),

@@ -1,4 +1,4 @@
-package help;
+package enums.help;
 
 public enum MyAccountValues {
     INFORMATION("Information"),

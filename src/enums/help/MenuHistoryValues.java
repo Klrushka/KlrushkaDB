@@ -1,4 +1,4 @@
-package help;
+package enums.help;
 
 public enum MenuHistoryValues {
     DISPLAY_HISTORY("Display history"),
