@@ -1,0 +1,2 @@
+Sun Sep 26 15:57:07 MSK 2021: |#2_qwe, LOGIN|
+Sun Sep 26 15:57:19 MSK 2021: |#2_qwe, CHANGE_USERNAME|
